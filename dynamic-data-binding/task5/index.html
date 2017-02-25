@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<div id="app">
+    <p>姓名：{{user.name}}</p>
+    <p>年龄：{{user.age}}</p>
+</div>
+
+
+<script src="src/Dep.js"></script>
+<script src="src/Watcher.js"></script>
+<script src="src/Observer.js"></script>
+<script src="src/Compiler.js"></script>
+<script src="src/Vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            user: {
+                name: 'youngwind',
+                age: 25
+            },
+            school: 'bupt',
+            major: 'computer'
+        }
+    });
+
+    setTimeout(function () {
+        app.data.user.name = 'hello word'
+        app.data.user.age =  22
+    },1000)
+</script>
+</body>
+</html>
