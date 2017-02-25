@@ -1,3 +1,6 @@
+/**
+ * 整个实现参考https://github.com/qieguo2016/Vueuv/blob/master/README.md
+ */
 class Vue {
     constructor(options) {
         this.$el = options.el
@@ -12,10 +15,11 @@ class Compiler {
         this.$el = options.el && document.querySelector(options.el)
         this.data = options.data
         if (this.$el) {
-
+            // 将实际DOM插入到新建的fragment中
             this.$fragment = this.nodeToFragment(this.$el);
+            // 处理模板
             this.compile(this.$fragment);
-
+            // 将处理好的模板插入到实际DOM中
             this.$el.appendChild(this.$fragment);
         }
     }
@@ -26,14 +30,14 @@ class Compiler {
             if (this.isIgnorable(child)) {     // delete '\n'
                 node.removeChild(child);
             } else {
-                fragment.appendChild(child);   // 移动操作，将child从原位置移动添加到fragment
+                fragment.appendChild(child);
             }
         }
         return fragment;
     }
 
     isIgnorable(node) {
-        var regIgnorable = /^[\t\n\r]+/;
+        let regIgnorable = /^[\t\n\r]+/;
         return (node.nodeType == 8) || ((node.nodeType == 3) && (regIgnorable.test(node.textContent)));
     }
 
@@ -49,12 +53,23 @@ class Compiler {
         })
     }
 
+    // with+eval获取模板中变量的具体值
     compileTextNode(node) {
         let text = node.textContent.trim()
         let exp = parseTextExp(text)
-        // let code = `with (this.data){node.textContent = eval(exp);console.log(node.textContent)}`
-        // new Function(code)
-        // console.log(node.textContent)
+        let code = `with (this.data){
+                        exp = eval(exp)
+                    }
+                    return exp     
+                   `
+        let textContent
+        try {
+            textContent = new Function('exp', code).call(this, exp)
+        } catch (e) {
+            console.error(e.message)
+        }
+
+        node.textContent = textContent || text
     }
 
     compileElementNode(node) {
