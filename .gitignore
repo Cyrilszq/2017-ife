@@ -1,1 +1,5 @@
 .idea
+music-player/node_modules
+music-player/.idea
+music-player/dist
+music-player.DS_Store

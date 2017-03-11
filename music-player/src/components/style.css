@@ -1,0 +1,32 @@
+ul{
+    list-style: none;
+    margin-left: 0;
+}
+h2{
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+a:hover{
+    color: gray;
+    text-decoration: underline;
+}
+.rank-panel{
+    min-width: 200px;
+    margin: 0 10px;
+    padding: 10px 30px;
+    border: 1px solid #eeeeee;
+}
+
+.rank-item{
+    text-align: left;
+}
+.page-control{
+    font-size: 12px;
+    float: right;
+    cursor: pointer;
+}
+
+

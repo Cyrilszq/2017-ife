@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+</head>
+<body>
+	<textarea id="test"></textarea>
+	<script type="text/javascript" src="task2.js"></script>
+	<script type="text/javascript">
+
+		let textarea = document.getElementById('test')
+		textarea.addEventListener('change',function() {
+			console.log(this.value)
+			let result = regTexts.head.test(this.value)
+			console.log(result)
+		})
+	</script>
+</body>
+</html>
