@@ -1,6 +1,6 @@
 ul{
     list-style: none;
-    margin-left: 0;
+    padding: 0;
 }
 h2{
     text-align: center;
@@ -14,18 +14,36 @@ a:hover{
     text-decoration: underline;
 }
 .rank-panel{
-    min-width: 200px;
     margin: 0 10px;
-    padding: 10px 30px;
-    border: 1px solid #eeeeee;
+    padding-bottom: 10px;
+    border: 1px solid #d9d9d9;
 }
 
 .rank-item{
     text-align: left;
+    height: 30px;
+    display: flex;
+    padding: 0 10px;
+    background-color: #f6f6f6;
+    justify-content: space-between;
+    align-items: center;
+}
+.rank-item:nth-child(2n){
+    background-color: #e6e6e6;
 }
 .page-control{
+    width: 24px;
     font-size: 12px;
     float: right;
+    cursor: pointer;
+}
+.icon-wrap{
+    visibility: hidden;
+}
+.rank-item:hover .icon-wrap{
+    visibility: visible;
+}
+.icon{
     cursor: pointer;
 }
 

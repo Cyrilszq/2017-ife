@@ -1,26 +1,52 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router'
 import './style.css'
-// const tabs = ['新歌榜','热歌榜','原创榜']
+import add from '../static/add.svg'
+import download from '../static/download.svg'
+import play from '../static/play.svg'
+import previous from '../static/previous.svg'
+import next from '../static/next.svg'
 
-const MusicList = ({type, list, headPic,onPageChangeClicked}) => {
+function addToLocal(id) {
+    localStorage.setItem(id, id)
+}
+
+
+const MusicList = ({list, headPic, onPageChangeNextClicked, onPageChangePreClicked}) => {
     return (
         <div className="rank-panel">
-            <img src={headPic}/>
+            <img src={headPic} width={300}/>
             <ul>
-                {list.map((song,index) => {
+                {list.map((song, index) => {
                     return (
-                    <Link to={`/player/${song.song_id}`} key={index}>
-                        <li  className="rank-item">
-                            {song.title}
+                        <li className="rank-item" key={index}>
+                            <Link to={`/player/${song.song_id}`}>
+                                <span>{song.title}</span>
+                            </Link>
+                            <div className="icon-wrap">
+                                <Link to={`/player/${song.song_id}`}>
+                                    <img
+                                        className="icon"
+                                        src={play}
+                                        width={24}></img>
+                                </Link>
+                                <img
+                                    className="icon"
+                                    src={add}
+                                    width={26}
+                                    onClick={addToLocal.bind(null, song.song_id)}></img>
+                                <img
+                                    className="icon"
+                                    src={download}
+                                    width={24}></img>
+                            </div>
                         </li>
-                    </Link>
                     )
                 })}
             </ul>
             <div>
-                <span className="page-control" onClick={onPageChangeClicked}>下一页</span>
-                <span className="page-control" onClick={onPageChangeClicked}>上一页</span>
+                <img src={next} className="page-control" onClick={onPageChangeNextClicked}/>
+                <img src={previous} className="page-control" onClick={onPageChangePreClicked}/>
             </div>
         </div>
     )

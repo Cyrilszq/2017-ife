@@ -2,15 +2,15 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import './style.css'
 import MusicList from '../components/MusicList'
-import {fetchMusicList, fetchAllMusicList,changePage} from '../action/index'
+import {fetchAllMusicList, fetchNextPage,fetchPrePage} from '../action/index'
 
 class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.handlePageChange = this.handlePageChange.bind(this)
     }
+
     componentDidMount() {
-        const {dispatch, selectedPlate} = this.props
+        const {dispatch} = this.props
         // dispatch(fetchMusicList({
         //     tab: selectedPlate,
         //     size:10,
@@ -18,11 +18,17 @@ class App extends Component {
         // }))
         dispatch(fetchAllMusicList())
     }
-    handlePageChange(){
-        this.props.dispatch(changePage())
+
+    handlePrePage(index) {
+        this.props.dispatch(fetchPrePage(index))
     }
+
+    handleNextPage(index) {
+        this.props.dispatch(fetchNextPage(index))
+    }
+
     render() {
-        const {allMusicList,dispatch} = this.props
+        const {allMusicList, dispatch} = this.props
         let view
         if (allMusicList.length) {
             view = allMusicList.map((musicList, index) => {
@@ -32,7 +38,8 @@ class App extends Component {
                         list={musicList.songList}
                         key={index}
                         headPic={musicList.headPic}
-                        onPageChangeClicked={this.handlePageChange}/>
+                        onPageChangeNextClicked={this.handleNextPage.bind(this, index)}
+                        onPageChangePreClicked={this.handlePrePage.bind(this,index)}/>
                 )
             })
         }
