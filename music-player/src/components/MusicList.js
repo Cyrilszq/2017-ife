@@ -7,8 +7,12 @@ import play from '../static/play.svg'
 import previous from '../static/previous.svg'
 import next from '../static/next.svg'
 
-function addToLocal(id) {
-    localStorage.setItem(id, id)
+function addToLocal({song_id, title, author}) {
+    let json = {
+        "title": title,
+        "author": author
+    }
+    localStorage.setItem(song_id, JSON.stringify(json))
 }
 
 
@@ -34,7 +38,7 @@ const MusicList = ({list, headPic, onPageChangeNextClicked, onPageChangePreClick
                                     className="icon"
                                     src={add}
                                     width={26}
-                                    onClick={addToLocal.bind(null, song.song_id)}></img>
+                                    onClick={addToLocal.bind(null, song)}></img>
                                 <img
                                     className="icon"
                                     src={download}

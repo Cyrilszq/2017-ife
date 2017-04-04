@@ -1,0 +1,26 @@
+.bg{
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    /*background: linear-gradient(to bottom, #333333,#888888 60%,#EEEEEE);*/
+    /*background-size: cover;*/
+    /*filter: blur(3px);*/
+}
+.bg::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left:0;
+    bottom: 0;
+    background: linear-gradient(to bottom, #333333,#888888 60%,#EEEEEE);
+    z-index: -1;
+    filter: blur(5px);
+}
+.song-list-item span{
+    display: inline-block;
+    padding: 6px;
+    margin: 0 10px;
+    cursor: pointer;
+}
